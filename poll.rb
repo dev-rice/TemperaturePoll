@@ -10,7 +10,7 @@ data = []
 while true do
     current_temperature = proc.temperature
     data << [time.to_i, current_temperature]
-    
+
     trimmed_data = data.last(num_points)
     num_elements = trimmed_data.length
     if (num_elements < num_points) then
@@ -25,12 +25,12 @@ while true do
     min_y = 20
     max_y = 55
     step_size = 1
-    puts AsciiCharts::Cartesian.new(trimmed_data, 
-                                    :min_y_vals => min_y, 
-                                    :max_y_vals => max_y, 
+    puts AsciiCharts::ChrisChart.new(trimmed_data, 
+                                    :min_y_vals => min_y,
+                                    :max_y_vals => max_y,
                                     :hide_zero => true,
                                     :title => "CPU Temperature",
-                                    :bar => true).draw    
+                                    :bar => true).draw
 
     sleep(period)
     time += 1
