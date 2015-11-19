@@ -14,6 +14,9 @@ module AsciiCharts
     def initialize(data, options={})
       @data = data
       @options = options
+      
+      @max_y_vals = self.options[:max_y_vals] || DEFAULT_MAX_Y_VALS
+      @min_y_vals = self.options[:min_y_vals] || DEFAULT_MIN_Y_VALS
     end
 
 
@@ -234,8 +237,10 @@ module AsciiCharts
       bar_width = self.max_xval_width + 1
 
       lines << (' ' * self.max_yval_width) + ' ' + self.rounded_data.map{|pair| pair[0].to_s.center(bar_width)}.join('')
+        
 
-      self.y_range.each_with_index do |current_y, i|
+      (@min_y_vals..@max_y_vals).to_a.each_with_index do |current_y, i|
+      #self.y_range.each_with_index do |current_y, i| 
         yval = current_y.to_s
         bar = if 0 == i
                 '+'
